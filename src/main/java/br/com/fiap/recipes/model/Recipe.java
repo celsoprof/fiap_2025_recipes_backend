@@ -1,0 +1,74 @@
+package br.com.fiap.recipes.model;
+
+import jakarta.persistence.*;
+
+import java.io.Serializable;
+
+@Entity
+@Table(name = "tbl_recipe")
+public class Recipe {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String title;
+    private String description;
+
+    @Enumerated(EnumType.STRING)
+    private DifficultLevel difficultLevel;
+
+    private int cookingTime;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_category_id")
+    private Category category;
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public DifficultLevel getDifficultLevel() {
+        return difficultLevel;
+    }
+
+    public void setDifficultLevel(DifficultLevel difficultLevel) {
+        this.difficultLevel = difficultLevel;
+    }
+
+    public int getCookingTime() {
+        return cookingTime;
+    }
+
+    public void setCookingTime(int cookingTime) {
+        this.cookingTime = cookingTime;
+    }
+}
