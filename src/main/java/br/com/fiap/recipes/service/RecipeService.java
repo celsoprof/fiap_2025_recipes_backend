@@ -1,5 +1,6 @@
 package br.com.fiap.recipes.service;
 
+import br.com.fiap.recipes.exception.RecipeNotFountException;
 import br.com.fiap.recipes.model.Category;
 import br.com.fiap.recipes.model.Recipe;
 import br.com.fiap.recipes.repository.RecipeRepository;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RecipeService {
@@ -23,7 +25,15 @@ public class RecipeService {
     }
 
     public Recipe findById(Long id) {
-        return recipeRepository.findById(id).orElse(null);
+        Optional<Recipe> recipe = recipeRepository.findById(id);
+
+        if (recipe.isPresent()) {
+            return recipe.get();
+        }  else {
+            System.out.println("****** Recipe NOT FOUND!!");
+            throw new RecipeNotFountException("Recipe Not Fount");
+        }
+
     }
 
     public void delete(Long id) {

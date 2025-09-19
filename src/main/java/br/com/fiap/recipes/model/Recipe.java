@@ -1,6 +1,8 @@
 package br.com.fiap.recipes.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
 import java.io.Serializable;
 
@@ -12,12 +14,14 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "The recipe's title is required!")
     private String title;
     private String description;
 
     @Enumerated(EnumType.STRING)
     private DifficultLevel difficultLevel;
 
+    @Positive(message = "The cooking time must be positive!")
     private int cookingTime;
 
     @ManyToOne(fetch = FetchType.EAGER)

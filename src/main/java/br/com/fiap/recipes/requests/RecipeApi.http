@@ -5,20 +5,19 @@ GET http://localhost:8080/api/recipes
 GET http://localhost:8080/api/recipes/1
 
 ### Buscar uma receita pelo id
-GET http://localhost:8080/api/recipes/2
+GET http://localhost:8080/api/recipes/20
 
 ### Listar recitas por categoria
-GET http://localhost:8080/api/recipes/category/6
+GET http://localhost:8080/api/recipes/category/1
 
 ### Cadastrar uma nova receita
 POST http://localhost:8080/api/recipes
 Content-Type: application/json
 
 {
-    "title": "MACARRÃO A ARRABIATA",
     "description": "UM BELO PRATO PARA ALEGRAR A FAMILIA.",
     "difficultLevel": "INTERMEDIATE",
-    "cookingTime": 60,
+    "cookingTime": -60,
     "category": {
       "categoryId": 6
     }
@@ -32,9 +31,8 @@ PUT http://localhost:8080/api/recipes
 Content-Type: application/json
 
 {
-  "id": 3,
-  "title": "MACARRONADA ITALIANA",
+  "id": 4,
   "description": "PRATO TÍPICO PARA SERVIR AOS DOMINGOS",
   "difficultLevel": "INTERMEDIATE",
-  "cookingTime": 120
+  "cookingTime": -120
 }
