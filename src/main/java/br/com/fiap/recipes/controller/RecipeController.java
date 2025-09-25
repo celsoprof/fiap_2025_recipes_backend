@@ -10,41 +10,41 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/recipes")
 public class RecipeController {
 
     @Autowired
     private RecipeService recipeService;
 
-    @GetMapping("/recipes")
+    @GetMapping
     public List<Recipe> getRecipes() {
         return recipeService.findAll();
     }
 
-    @GetMapping("/recipes/{id}")
+    @GetMapping("/{id}")
     public Recipe getRecipe(@PathVariable Long id) {
         return recipeService.findById(id);
     }
 
-    @PostMapping("/recipes")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Recipe createRecipe(@Valid @RequestBody Recipe recipe) {
         return recipeService.save(recipe);
     }
 
-    @DeleteMapping("/recipes/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteRecipe(@PathVariable Long id) {
         recipeService.delete(id);
     }
 
-    @PutMapping("/recipes")
+    @PutMapping
     @ResponseStatus(HttpStatus.OK)
     public Recipe updateRecipe(@RequestBody Recipe recipe) {
         return recipeService.save(recipe);
     }
 
-    @GetMapping("/recipes/category/{categoryId}")
+    @GetMapping("/category/{categoryId}")
     @ResponseStatus(HttpStatus.OK)
     public List<Recipe> getRecipesByCategory(@PathVariable Long categoryId) {
         return recipeService.findRecipesByCategory(categoryId);
