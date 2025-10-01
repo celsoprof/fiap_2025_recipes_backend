@@ -1,5 +1,6 @@
 package br.com.fiap.recipes.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -14,7 +15,7 @@ public class Ingredient {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recipe_id")
-    //@JsonIgnore
+    @JsonBackReference
     private Recipe recipe;
 
     public Recipe getRecipe() {
