@@ -5,6 +5,7 @@ import br.com.fiap.recipes.service.RecipeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,37 +18,47 @@ public class RecipeController {
     private RecipeService recipeService;
 
     @GetMapping
-    public List<Recipe> getRecipes() {
-        return recipeService.findAll();
+    public ResponseEntity<List<Recipe>> getRecipes() {
+        List<Recipe> recipes = recipeService.findAll();
+        return ResponseEntity.ok(recipes);
     }
 
     @GetMapping("/{id}")
-    public Recipe getRecipe(@PathVariable Long id) {
-        return recipeService.findById(id);
+    public ResponseEntity<Recipe> getRecipe(@PathVariable Long id) {
+        Recipe recipe = recipeService.findById(id);
+        if  (recipe == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(recipe);
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Recipe createRecipe(@Valid @RequestBody Recipe recipe) {
-        return recipeService.save(recipe);
+    public ResponseEntity<Recipe> createRecipe(@Valid @RequestBody Recipe recipe) {
+        Recipe newRecipe = recipeService.save(recipe);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newRecipe);
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteRecipe(@PathVariable Long id) {
+    public ResponseEntity deleteRecipe(@PathVariable Long id) {
+        Recipe recipe = recipeService.findById(id);
         recipeService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public Recipe updateRecipe(@RequestBody Recipe recipe) {
-        return recipeService.save(recipe);
+    public ResponseEntity<Recipe> updateRecipe(@RequestBody Recipe recipe) {
+        Recipe newRecipe = recipeService.save(recipe);
+        return ResponseEntity.ok(newRecipe);
     }
 
     @GetMapping("/categories/{categoryId}")
-    @ResponseStatus(HttpStatus.OK)
-    public List<Recipe> getRecipesByCategory(@PathVariable Long categoryId) {
-        return recipeService.findRecipesByCategory(categoryId);
+    public ResponseEntity<List<Recipe>> getRecipesByCategory(@PathVariable Long categoryId) {
+        List<Recipe> recipes = recipeService.findRecipesByCategory(categoryId);
+        if (recipes.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(recipes);
     }
 
 }

@@ -26,13 +26,14 @@ public class RecipeService {
 
     public Recipe findById(Long id) {
         Optional<Recipe> recipe = recipeRepository.findById(id);
+        return recipe.orElse(null);
 
-        if (recipe.isPresent()) {
-            return recipe.get();
-        }  else {
-            System.out.println("****** Recipe NOT FOUND!!");
-            throw new RecipeNotFountException("Recipe Not Fount");
-        }
+//        if (recipe.isPresent()) {
+//            return recipe.get();
+//        }  else {
+//            System.out.println("****** Recipe NOT FOUND!!");
+//            throw new RecipeNotFountException("Recipe Not Fount");
+//        }
 
     }
 

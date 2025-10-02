@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,7 +18,11 @@ public class Recipe {
     private Long id;
 
     @NotBlank(message = "The recipe's title is required!")
+    @Size(min = 4, max = 255)
     private String title;
+
+    @NotBlank
+    @Size(min = 4, max = 255)
     private String description;
 
     @Enumerated(EnumType.STRING)
