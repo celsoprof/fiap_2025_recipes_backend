@@ -44,7 +44,7 @@ public class RecipeController {
         return recipeService.save(recipe);
     }
 
-    @GetMapping("/category/{categoryId}")
+    @GetMapping("/categories/{categoryId}")
     @ResponseStatus(HttpStatus.OK)
     public List<Recipe> getRecipesByCategory(@PathVariable Long categoryId) {
         return recipeService.findRecipesByCategory(categoryId);

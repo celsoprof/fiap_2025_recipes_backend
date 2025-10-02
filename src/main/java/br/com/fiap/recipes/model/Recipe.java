@@ -34,6 +34,7 @@ public class Recipe {
     @JsonManagedReference
     private List<Ingredient> ingredients;
 
+    @ManyToOne(fetch = FetchType.EAGER)
     public Category getCategory() {
         return category;
     }
