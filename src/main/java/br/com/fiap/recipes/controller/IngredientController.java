@@ -60,7 +60,4 @@ public class IngredientController {
         return ingredientService.save(ingredient);
     }
 
-
-
-
 }

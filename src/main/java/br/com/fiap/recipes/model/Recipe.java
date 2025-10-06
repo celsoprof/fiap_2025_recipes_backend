@@ -40,6 +40,10 @@ public class Recipe {
     @JsonManagedReference
     private List<Ingredient> ingredients;
 
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<PreparationMethod> preparationMethods;
+
     private LocalDate creationDate;
     private String url;
 
