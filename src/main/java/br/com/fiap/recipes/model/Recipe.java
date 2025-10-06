@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -38,6 +39,12 @@ public class Recipe {
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Ingredient> ingredients;
+
+    private LocalDate creationDate;
+    private String url;
+
+    public Recipe() {
+    }
 
     @ManyToOne(fetch = FetchType.EAGER)
     public Category getCategory() {
@@ -94,5 +101,36 @@ public class Recipe {
 
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", difficultLevel=" + difficultLevel +
+                ", cookingTime=" + cookingTime +
+                ", category=" + category +
+                ", ingredients=" + ingredients +
+                ", creationDate=" + creationDate +
+                ", url='" + url + '\'' +
+                '}';
     }
 }
