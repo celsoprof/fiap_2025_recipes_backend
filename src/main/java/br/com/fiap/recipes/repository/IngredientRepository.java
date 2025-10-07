@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface IngredientRepository extends JpaRepository<Ingredient, Long> {
 
-    List<Ingredient> findByRecipeId(@RequestParam Long id);
+    List<Ingredient> findByRecipeId(Long id);
 
     @Query("SELECT i.id, i.description, i.recipe.id, r.id, r.title, r.description FROM Ingredient i JOIN i.recipe r where r.id = :id ORDER BY r.id ")
     List<Ingredient> listIngredients(@RequestParam Long id);

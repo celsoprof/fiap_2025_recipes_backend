@@ -34,8 +34,16 @@ public class PreparationMethodService {
         preparationMethodRepository.deleteById(id);
     }
 
-    public PreparationMethod update(PreparationMethod preparationMethod) {
+    public PreparationMethod update(Long id, PreparationMethod preparationMethod) {
         return preparationMethodRepository.save(preparationMethod);
+    }
+
+    public List<PreparationMethod> findByRecipeId(int id) {
+        return preparationMethodRepository.findByRecipeId((long) id);
+    }
+
+    public List<PreparationMethod> findByPreparationId(Long preparationId) {
+        return preparationMethodRepository.listPreparationMethods(preparationId);
     }
 
 }

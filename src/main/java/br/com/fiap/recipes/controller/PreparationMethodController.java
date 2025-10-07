@@ -1,6 +1,8 @@
 package br.com.fiap.recipes.controller;
 
 import br.com.fiap.recipes.model.PreparationMethod;
+import br.com.fiap.recipes.model.Recipe;
+import br.com.fiap.recipes.repository.PreparationMethodRepository;
 import br.com.fiap.recipes.service.PreparationMethodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +25,15 @@ public class PreparationMethodController {
         return ResponseEntity.ok(preparationMethods);
     }
 
+    @GetMapping("/recipe/{id}")
+    public ResponseEntity<List<PreparationMethod>> getPreparationMethodsByRecipe(@PathVariable Long id) {
+        List<PreparationMethod> preparationMethods = preparationMethodService.findByRecipeId(id.byteValue());
+        if (preparationMethods.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(preparationMethods);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<PreparationMethod> getPreparationMethod(@PathVariable int id) {
         PreparationMethod preparationMethod = preparationMethodService.findById(id);
@@ -39,8 +50,30 @@ public class PreparationMethodController {
     }
 
     @DeleteMapping("/{id}")
-    public void deletePreparationMethod(@PathVariable int id) {
-        preparationMethodService.deleteById(id);
+    public ResponseEntity deletePreparationMethod(@PathVariable int id) {
+
+        PreparationMethod preparationMethod = preparationMethodService.findById(id);
+
+        if (preparationMethod == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            preparationMethodService.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }
+
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PreparationMethod> updatePreparationMethod(@PathVariable Long id, @RequestBody PreparationMethod preparationMethod) {
+        PreparationMethod actualPreparationMethod = preparationMethodService.findById(id.intValue());
+
+        if (actualPreparationMethod == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            PreparationMethod newPreparationMethod = preparationMethodService.save(preparationMethod);
+            return ResponseEntity.ok(newPreparationMethod);
+        }
+
     }
 
 }
