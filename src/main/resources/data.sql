@@ -1,13 +1,14 @@
 -- noinspection SqlNoDataSourceInspectionForFile
 
 --  CADASTRO DE CATEGORIAS
-    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME) VALUES (1, 'Chicken')
-    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME) VALUES (2, 'Beef')
-    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME) VALUES (3, 'Fish')
-    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME) VALUES (4, 'Bakery')
-    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME) VALUES (5, 'Vegetable')
-    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME) VALUES (6, 'Massa')
-    ALTER TABLE tbl_category ALTER COLUMN CATEGORY_ID RESTART WITH 7
+    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL) VALUES (1, 'Chicken', '/images/chiken.png')
+    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL) VALUES (2, 'Beef', '/images/beef.png')
+    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL) VALUES (3, 'Fish', '/images/fish.png')
+    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL) VALUES (4, 'Bakery', '/images/bakery.png')
+    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL) VALUES (5, 'Vegetable', '/images/vegetable.png')
+    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL) VALUES (6, 'Drink', '/images/drink.png')
+    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL) VALUES (7, 'Dessert', '/images/dessert.png')
+    ALTER TABLE tbl_category ALTER COLUMN CATEGORY_ID RESTART WITH 8
 
 --  CADASTRO DE RECEITAS
     INSERT INTO tbl_recipe (ID, TITLE, DESCRIPTION, DIFFICULT_LEVEL, COOKING_TIME, category_category_id, creation_date) VALUES (1, 'Torta de frango','PRATO TIPICAMENTE BRASILEIRO','ADVANCED', 240, 1, '2025-10-05')

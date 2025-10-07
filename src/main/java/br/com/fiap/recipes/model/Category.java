@@ -19,6 +19,8 @@ public class Category {
     @Size(min = 5, max = 100)
     private String categoryName;
 
+    private String url;
+
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Recipe> recipes;
 
@@ -36,5 +38,13 @@ public class Category {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
