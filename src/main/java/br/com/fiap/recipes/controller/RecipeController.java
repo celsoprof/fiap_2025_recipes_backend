@@ -1,6 +1,8 @@
 package br.com.fiap.recipes.controller;
 
+import br.com.fiap.recipes.model.Ingredient;
 import br.com.fiap.recipes.model.Recipe;
+import br.com.fiap.recipes.service.IngredientService;
 import br.com.fiap.recipes.service.RecipeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/recipes")
@@ -18,6 +21,9 @@ public class RecipeController {
 
     @Autowired
     private RecipeService recipeService;
+
+    @Autowired
+    private IngredientService ingredientService;
 
     @GetMapping
     public ResponseEntity<List<Recipe>> getRecipes() {
@@ -38,6 +44,37 @@ public class RecipeController {
     public ResponseEntity<Recipe> createRecipe(@Valid @RequestBody Recipe recipe) {
         Recipe newRecipe = recipeService.save(recipe);
         return ResponseEntity.status(HttpStatus.CREATED).body(newRecipe);
+    }
+
+    @PostMapping("/{id}/ingredients")
+    public ResponseEntity<List<Ingredient>> addIngredients(
+            @RequestBody List<Ingredient> ingredients,
+            @PathVariable Long id
+    ) {
+        Recipe recipe = recipeService.findById(id);
+
+        if (recipe == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        List<Ingredient> newIngredients = ingredients.stream()
+                        .peek(i -> i.setRecipe(recipe)).toList();
+
+        List<Ingredient> ingredientsSaved = ingredientService.saveAll(newIngredients);
+        return ResponseEntity.status(HttpStatus.CREATED).body(ingredientsSaved);
+    }
+
+    @GetMapping("/{id}/ingredients")
+    public ResponseEntity<List<Ingredient>> getIngredients(@PathVariable Long id) {
+
+        Recipe recipe = recipeService.findById(id);
+
+        if (recipe == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        List<Ingredient> ingredients = recipe.getIngredients();
+        return ResponseEntity.ok(ingredients);
     }
 
     @PostMapping("/{id}/upload-image")
@@ -88,4 +125,7 @@ public class RecipeController {
         }
         return ResponseEntity.ok(recentRecipes);
     }
+
+    // Adiciona um modo de preparo para a receita
+
 }

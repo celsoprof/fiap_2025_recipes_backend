@@ -1,7 +1,7 @@
 -- noinspection SqlNoDataSourceInspectionForFile
 
 --  CADASTRO DE CATEGORIAS
-    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL) VALUES (1, 'Chicken', '/images/chiken.png')
+    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL) VALUES (1, 'Chicken', '/images/chicken.png')
     INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL) VALUES (2, 'Beef', '/images/beef.png')
     INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL) VALUES (3, 'Fish', '/images/fish.png')
     INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL) VALUES (4, 'Bakery', '/images/bakery.png')

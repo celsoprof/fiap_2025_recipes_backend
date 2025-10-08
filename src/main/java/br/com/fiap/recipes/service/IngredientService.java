@@ -1,6 +1,7 @@
 package br.com.fiap.recipes.service;
 
 import br.com.fiap.recipes.model.Ingredient;
+import br.com.fiap.recipes.model.Recipe;
 import br.com.fiap.recipes.repository.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,9 @@ public class IngredientService {
     @Autowired
     private IngredientRepository ingredientRepository;
 
+    @Autowired
+    private RecipeService recipeService;
+
     public List<Ingredient> findAll(){
         return ingredientRepository.findAll();
     }
@@ -23,6 +27,10 @@ public class IngredientService {
 
     public Ingredient save(Ingredient ingredient){
         return ingredientRepository.save(ingredient);
+    }
+
+    public List<Ingredient> saveAll(List<Ingredient> ingredients){
+        return ingredientRepository.saveAll(ingredients);
     }
 
     public void deleteById(Long id){
