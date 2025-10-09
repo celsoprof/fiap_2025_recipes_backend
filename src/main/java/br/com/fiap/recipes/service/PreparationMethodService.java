@@ -30,6 +30,10 @@ public class PreparationMethodService {
         return preparationMethodRepository.save(preparationMethod);
     }
 
+    public List<PreparationMethod> saveAll(List<PreparationMethod> preparationMethods) {
+        return preparationMethodRepository.saveAll(preparationMethods);
+    }
+
     public void deleteById(int id) {
         preparationMethodRepository.deleteById(id);
     }

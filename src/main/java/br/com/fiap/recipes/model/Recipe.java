@@ -125,6 +125,14 @@ public class Recipe {
         this.url = url;
     }
 
+    public void setPreparationMethods(List<PreparationMethod> preparationMethods) {
+        this.preparationMethods = preparationMethods;
+    }
+
+    public List<PreparationMethod> getPreparationMethods() {
+        return preparationMethods;
+    }
+
     @Override
     public String toString() {
         return "Recipe{" +

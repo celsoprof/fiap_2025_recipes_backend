@@ -1,8 +1,10 @@
 package br.com.fiap.recipes.controller;
 
 import br.com.fiap.recipes.model.Ingredient;
+import br.com.fiap.recipes.model.PreparationMethod;
 import br.com.fiap.recipes.model.Recipe;
 import br.com.fiap.recipes.service.IngredientService;
+import br.com.fiap.recipes.service.PreparationMethodService;
 import br.com.fiap.recipes.service.RecipeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ public class RecipeController {
 
     @Autowired
     private IngredientService ingredientService;
+    @Autowired
+    private PreparationMethodService preparationMethodService;
 
     @GetMapping
     public ResponseEntity<List<Recipe>> getRecipes() {
@@ -64,6 +68,24 @@ public class RecipeController {
         return ResponseEntity.status(HttpStatus.CREATED).body(ingredientsSaved);
     }
 
+    @PostMapping("/{id}/preparation-methods")
+    public ResponseEntity<List<PreparationMethod>> addPreparationMethods(
+            @RequestBody List<PreparationMethod> methods,
+            @PathVariable Long id
+    ){
+        Recipe recipe = recipeService.findById(id);
+        if (recipe == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        methods.stream()
+                .peek(i -> i.setRecipe(recipe)).toList();
+
+        List<PreparationMethod> methodsSaved = preparationMethodService.saveAll(methods);
+        return ResponseEntity.status(HttpStatus.CREATED).body(methodsSaved);
+
+    }
+
     @GetMapping("/{id}/ingredients")
     public ResponseEntity<List<Ingredient>> getIngredients(@PathVariable Long id) {
 
@@ -75,6 +97,16 @@ public class RecipeController {
 
         List<Ingredient> ingredients = recipe.getIngredients();
         return ResponseEntity.ok(ingredients);
+    }
+
+    @GetMapping("/{id}/preparation-methods")
+    public ResponseEntity<List<PreparationMethod>> getPreparationMethods(@PathVariable Long id) {
+        Recipe recipe = recipeService.findById(id);
+        if (recipe == null) {
+            return ResponseEntity.notFound().build();
+        }
+        List<PreparationMethod> methods = recipe.getPreparationMethods();
+        return ResponseEntity.ok(methods);
     }
 
     @PostMapping("/{id}/upload-image")
