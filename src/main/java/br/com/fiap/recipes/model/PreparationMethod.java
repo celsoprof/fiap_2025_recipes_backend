@@ -15,7 +15,7 @@ public class PreparationMethod {
     private Long id;
 
     @NotBlank
-    @Size(min = 1, max = 100)
+    @Size(min = 1, max = 200)
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)

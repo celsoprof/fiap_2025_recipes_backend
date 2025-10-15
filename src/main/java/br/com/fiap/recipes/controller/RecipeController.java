@@ -158,6 +158,4 @@ public class RecipeController {
         return ResponseEntity.ok(recentRecipes);
     }
 
-    // Adiciona um modo de preparo para a receita
-
 }
