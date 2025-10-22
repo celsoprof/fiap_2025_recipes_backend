@@ -1,18 +1,18 @@
 -- noinspection SqlNoDataSourceInspectionForFile
 
 --  CADASTRO DE CATEGORIAS
-    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL) VALUES (1, 'Chicken', '/images/chicken.png')
-    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL) VALUES (2, 'Beef', '/images/beef.png')
-    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL) VALUES (3, 'Fish', '/images/fish.png')
-    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL) VALUES (4, 'Bakery', '/images/bakery.png')
-    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL) VALUES (5, 'Vegetable', '/images/vegetable.png')
-    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL) VALUES (6, 'Drink', '/images/drink.png')
-    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL) VALUES (7, 'Dessert', '/images/dessert.png')
+    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL, COLOR) VALUES (1, 'Chicken', '/images/chicken.png', 'FFABF2E9')
+    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL, COLOR) VALUES (2, 'Beef', '/images/beef.png', 'FFF4D6C0')
+    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL, COLOR) VALUES (3, 'Fish', '/images/fish.png', 'FFC6DAFA')
+    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL, COLOR) VALUES (4, 'Bakery', '/images/bakery.png', 'FFF8D9D9')
+    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL, COLOR) VALUES (5, 'Vegetable', '/images/vegetable.png', 'FFABF2E9')
+    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL, COLOR) VALUES (6, 'Drink', '/images/drink.png', 'FF80DEEA')
+    INSERT INTO tbl_category(CATEGORY_ID, CATEGORY_NAME, URL, COLOR) VALUES (7, 'Dessert', '/images/dessert.png', 'FF72412B')
     ALTER TABLE tbl_category ALTER COLUMN CATEGORY_ID RESTART WITH 8
 
 --  CADASTRO DE RECEITAS
     INSERT INTO tbl_recipe (ID, TITLE, DESCRIPTION, DIFFICULT_LEVEL, COOKING_TIME, category_category_id, creation_date, url) VALUES (1, 'Torta de frango','Essa receita de torta de frango de liquidificador é deliciosa e muito prática para o dia a dia.','ADVANCED', 60, 1, '2025-10-05', '/images/torta_de_frango.jpg')
-    INSERT INTO tbl_recipe (ID, TITLE, DESCRIPTION, DIFFICULT_LEVEL, COOKING_TIME, category_category_id, creation_date, url) VALUES (2, 'Bolo de cenoura','Confira essa clássica receita de bolo de cenoura simples e fácil, nossa campeã de acessos!','BEGGINER', 40, 7, '2025-09-05', '/images/bolo_de_cenoura.jpg')
+    INSERT INTO tbl_recipe (ID, TITLE, DESCRIPTION, DIFFICULT_LEVEL, COOKING_TIME, category_category_id, creation_date, url) VALUES (2, 'Bolo de cenoura','Confira essa clássica receita de bolo de cenoura simples e fácil, nossa campeã de acessos!','BEGINNER', 40, 7, '2025-09-05', '/images/bolo_de_cenoura.jpg')
     INSERT INTO tbl_recipe (ID, TITLE, DESCRIPTION, DIFFICULT_LEVEL, COOKING_TIME, category_category_id, creation_date, url) VALUES (3, 'Salada de berinjela','A salada de berinjela é uma opção saborosa e saudável para os amantes da culinária mediterrânea.','INTERMEDIATE', 30, 5, '2025-10-03', '/images/salada_de_berinjela.jpg')
     ALTER TABLE tbl_recipe ALTER COLUMN ID RESTART WITH 4
 

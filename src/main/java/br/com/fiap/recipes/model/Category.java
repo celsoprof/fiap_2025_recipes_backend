@@ -20,6 +20,7 @@ public class Category {
     private String categoryName;
 
     private String url;
+    private String color;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Recipe> recipes;
@@ -46,5 +47,13 @@ public class Category {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+
     }
 }
